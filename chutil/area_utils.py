@@ -1,5 +1,3 @@
-import numpy, MV2, cdms2, cdutil
-
 """
 area_utils.py
 
@@ -9,12 +7,14 @@ Available Functions:
     getAreaOfAllClosedDomains()
 
 
-For detailed docstring read those functions __doc__.
+For detailed docstring read available functions __doc__.
 
 Author : Arulalan.T
 Date : 10.07.2014
 
 """
+
+import numpy, MV2, cdms2, cdutil
 
 
 def _getEastPixel(data, row, col):
