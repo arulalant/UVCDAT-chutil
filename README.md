@@ -8,7 +8,7 @@ Challenge Utilities of UV-CDAT
 
 Outputs
 =======
-  There is another branch available called [outputs](https://github.com/arulalant/UVCDAT-chutil/tree/outputs) which carried all demos outputs.
-  Outputs like plot (png), (nc file), etc
+  There is another branch available called [outputs](https://github.com/arulalant/UVCDAT-chutil/tree/outputs) which carried all demos outputs
+  like plot (png), (nc file), etc.
   
   By default [master](https://github.com/arulalant/UVCDAT-chutil/blob/master/) branch does not carry output/s.
