@@ -26,6 +26,10 @@ Sample OutPlots
 
   ![maskOutOrRegionsDemo_1.png](https://raw.githubusercontent.com/arulalant/UVCDAT-chutil/outputs/examples/region_utils/outplots_maskOutOfRegions/maskOutOfRegionsDemo_1.png)
   
+  <pre><b>Note : The state boundaries and no of states of India may not depicted correctly.</b> 
+  To show region access example, I used 2005 standard shape file.</pre>
+  
+  
   More detailed example outplots are available at [outputs](https://github.com/arulalant/UVCDAT-chutil/tree/outputs) branch's [example](https://github.com/arulalant/UVCDAT-chutil/tree/outputs/examples) directory.
   
 
