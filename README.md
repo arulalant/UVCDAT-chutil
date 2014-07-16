@@ -26,8 +26,10 @@ Sample OutPlots
 
   ![maskOutOrRegionsDemo_1.png](https://raw.githubusercontent.com/arulalant/UVCDAT-chutil/outputs/examples/region_utils/outplots_maskOutOfRegions/maskOutOfRegionsDemo_1.png)
   
-  For more detailed example outplots are available at [outputs](https://github.com/arulalant/UVCDAT-chutil/tree/outputs) branch.
+  More detailed example outplots are available at [outputs](https://github.com/arulalant/UVCDAT-chutil/tree/outputs) branch's [example](https://github.com/arulalant/UVCDAT-chutil/tree/outputs/examples) directory.
   
 
 Challenge Accepted :P
+
+
 Arulalan.T
