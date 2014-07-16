@@ -8,7 +8,7 @@ Date : 15.07.2014
 
 import os, sys 
 sys.path.append(os.path.abspath('../../'))
-from chutil.area_utils import irregularClosedRegionSelector, getAreaOfAllClosedDomains
+from chutil.region_utils import irregularClosedRegionSelector, getAreaOfAllClosedDomains
 import numpy, cdms2, MV2
 
 a = numpy.zeros((180, 360))

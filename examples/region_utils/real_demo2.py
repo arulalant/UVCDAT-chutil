@@ -1,5 +1,5 @@
 '''
-real_demo1.py
+real_demo2.py
 
 Written By : Arulalan.T
 Date : 15.07.2014
@@ -8,11 +8,12 @@ Date : 15.07.2014
 
 import os, sys 
 sys.path.append(os.path.abspath('../../'))
+import numpy
 import cdms2, MV2, vcs
-from area_utils import getAreaOfAllClosedDomains
+from region_utils import irregularClosedRegionSelector, getAreaOfAllClosedDomains
 
 
-f = cdms2.open('snc.nc')
+f = cdms2.open('data/snc.nc')
 data = f('snc', time=slice(1), squeeze=1)
 
 print "Contions \n 1. Mask less than 100 \n 2. Mask less than 30 and greater than 70"
@@ -51,5 +52,41 @@ dic = getAreaOfAllClosedDomains(data, mask_condition, update_mask=1)
 raw_input('enter to see diff in vcs')
 v.clear()
 
+
+
+for reg in dic:
+
+    dummy = MV2.zeros(data.shape)
+    dummy = MV2.masked_equal(dummy, 0)
+    dummy = cdms2.createVariable(dummy, id=data.id)
+    dummy.setAxisList(data.getAxisList())
+    print reg,
+    minrow, maxrow = dic[reg]['cpixels']['row']
+    mincol, maxcol = dic[reg]['cpixels']['col']
+    lat, lon = zip(*dic[reg]['blatlons'])
+
+    regionData = irregularClosedRegionSelector(data, lat, lon,
+                                    overwrite=1, condition=mask_condition)
+
+    dummy[minrow: maxrow+1, mincol: maxcol+1] = regionData
+    dummy.mask[minrow: maxrow+1, mincol: maxcol+1] = regionData.mask
+    area = dic[reg]['area']
+    totalPixelsCount = dic[reg]['totalPixelsCount']
+    
+    print "totalPixelsCount", dic[reg]['totalPixelsCount'], "area", dic[reg]['area']
+    # Plot the data using the above boxfill graphics method.
+    tit = '     '+ reg.capitalize() + '        Total Pixels Count = '
+    tit+= str(totalPixelsCount) + '      Area = '+str(area)+' m^2'
+    v.plot(dummy, cf_asd,continents=1, title=tit, bg=0)
+    v.png(os.path.join(dirname, reg + '.png'))
+
+    raw_input("enter")
+    v.clear()
+# end of for reg in dic:
+
+print "After update data "
+dataid = data.id
+data = MV2.where(mask_condition, data, numpy.nan)
+data.id = dataid
 v.plot(data, cf_asd, continents=1, title='  All regions '+value, bg=0)
 v.png(os.path.join(dirname, 'all_regions.png'))
