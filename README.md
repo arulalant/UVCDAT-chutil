@@ -3,7 +3,7 @@ UVCDAT-chutil
 
 Challenge Utilities of UV-CDAT
 
-  1. [area_utils.py](chutil/area_utils.py)
+  1. [region_utils.py](chutil/region_utils.py)
   2. [nonrect_utils.py](chutil/nonrect_utils.py) 
 
 Outputs
