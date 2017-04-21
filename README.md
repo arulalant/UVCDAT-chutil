@@ -19,7 +19,7 @@ Outputs
 Sample OutPlots
 ================
 
-  1. Auto Irregular Region Extractor & Area Calculater 
+  1. Auto Irregular Region Extractor & Area Calculator 
 
   ![region1.png](https://raw.githubusercontent.com/arulalant/UVCDAT-chutil/outputs/examples/region_utils/outplots_eq_100/region1.png)
 
