@@ -10,7 +10,7 @@ import os, sys
 sys.path.append(os.path.abspath('../../'))
 import numpy
 import cdms2, MV2, vcs
-from region_utils import irregularClosedRegionSelector, getAreaOfAllClosedDomains
+from chutil.region_utils import irregularClosedRegionSelector, getAreaOfAllClosedDomains
 
 
 f = cdms2.open('data/snc.nc')

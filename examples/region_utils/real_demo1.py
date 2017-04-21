@@ -9,7 +9,7 @@ Date : 15.07.2014
 import os, sys 
 sys.path.append(os.path.abspath('../../'))
 import cdms2, MV2, vcs
-from region_utils import getAreaOfAllClosedDomains
+from chutil.region_utils import getAreaOfAllClosedDomains
 
 
 f = cdms2.open('data/snc.nc')
