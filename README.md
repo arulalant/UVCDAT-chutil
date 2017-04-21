@@ -35,7 +35,7 @@ Sample OutPlots
   
   ![subdivision.png](https://github.com/arulalant/UVCDAT-chutil/blob/outputs/examples/shpfile_utils/t_outplots/state_4.png)
     
-  <pre><b>Note : The state boundary [shpfile](examples/shpfile_utils/shpdata) are licensed under copyright to IMD.</b></pre/
+  <b>Note : The state boundary [shpfiles](examples/shpfile_utils/shpdata) are licensed under copyright to IMD. </b>
   
   More detailed example outplots are available at [outputs](https://github.com/arulalant/UVCDAT-chutil/tree/outputs) branch's [example](https://github.com/arulalant/UVCDAT-chutil/tree/outputs/examples) directory.
   
