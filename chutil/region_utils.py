@@ -1,5 +1,6 @@
 """
 area_utils.py
+Using area (pip install area) function to compute each lat,lon pixel.
 
 Available Functions:
     irregularClosedRegionSelector()
@@ -15,6 +16,8 @@ Date : 10.07.2014
 """
 
 import numpy, MV2, cdms2, cdutil
+from area import area as arealatlon
+# pip install area https://github.com/scisco/area 
 
 
 def _getEastPixel(data, row, col):
@@ -477,7 +480,8 @@ def getAllBoundaryOfClosedAreas(data, **kwarg):
              'area'     -> lat, lon weighted area value in m^2 of that
                            particular closed domain/region
 
-             'unit'     -> area unit is m^2
+             'unit'     -> area unit is km^2
+             'all_lonlat' -> list contains all lon,lat of selected closed region (count would be totalPixelsCount)
 
              'bpixels'  -> list of tuples contain (i, j) or (x, y) or
                            (row, col) of boundary pixels of closed domain
@@ -579,17 +583,18 @@ def getAllBoundaryOfClosedAreas(data, **kwarg):
                                         overwrite=False, **kwarg)
         # counting the no of pixel contains value other than masked pixels.
         dic['totalPixelsCount'] = selectedRegionData.count()
-        # compute region area
-        oneRegionData = MV2.ones(selectedRegionData.shape)
-        oneRegionData = cdms2.createVariable(oneRegionData,
-                                    mask=selectedRegionData.mask)
-        oneRegionData.setAxisList(selectedRegionData.getAxisList())
-        # get the weighted area by sum action and multiply with (111km)^2
-        area = cdutil.averager(oneRegionData, axis='xy',
-                          weight='weighted', action='sum').data * 1.2321e10
-        dic['area'] = area
-        dic['unit'] = 'm^2'
-
+        all_lonlat = []
+        slat = selectedRegionData.getLatitude()[:]
+        slon = selectedRegionData.getLongitude()[:]
+        for i, plat in enumerate(slat):
+            for j, plon in enumerate(slon):
+                if selectedRegionData[i][j]: all_lonlat.append([plon, plat])
+        obj = {'type': 'Polygon', 'coordinates':[all_lonlat]} # atleast 4 lonlat points required under Polygon type.
+        # https://stackoverflow.com/questions/4681737/how-to-calculate-the-area-of-a-polygon-on-the-earths-surface-using-python
+        # https://github.com/scisco/area
+        dic['area'] = arealatlon(obj)/1e6 # convert to km^2 unit.
+        dic['unit'] = 'km^2'
+        dic['all_lonlat'] = all_lonlat
         # store dic into global dictionary whose key is no of pixels
         # in the selected region.
         areadic['region'+str(count)] = dic
