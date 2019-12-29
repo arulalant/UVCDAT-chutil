@@ -583,18 +583,22 @@ def getAllBoundaryOfClosedAreas(data, **kwarg):
                                         overwrite=False, **kwarg)
         # counting the no of pixel contains value other than masked pixels.
         dic['totalPixelsCount'] = selectedRegionData.count()
-        all_lonlat = []
-        slat = selectedRegionData.getLatitude()[:]
-        slon = selectedRegionData.getLongitude()[:]
-        for i, plat in enumerate(slat):
-            for j, plon in enumerate(slon):
-                if selectedRegionData[i][j]: all_lonlat.append([plon, plat])
-        obj = {'type': 'Polygon', 'coordinates':[all_lonlat]} # atleast 4 lonlat points required under Polygon type.
-        # https://stackoverflow.com/questions/4681737/how-to-calculate-the-area-of-a-polygon-on-the-earths-surface-using-python
-        # https://github.com/scisco/area
-        dic['area'] = arealatlon(obj)/1e6 # convert to km^2 unit.
-        dic['unit'] = 'km^2'
-        dic['all_lonlat'] = all_lonlat
+        if selectedRegionData.shape == (1,1):
+           dic['area'] = 0
+        else:
+           # compute region area
+           all_lonlat = []
+           slat = selectedRegionData.getLatitude()[:]
+           slon = selectedRegionData.getLongitude()[:]
+           for i, plat in enumerate(slat):
+               for j, plon in enumerate(slon):
+                   if selectedRegionData[i,j]: all_lonlat.append([plon, plat])
+           obj = {'type': 'Polygon', 'coordinates':[all_lonlat]}
+           # https://stackoverflow.com/questions/4681737/how-to-calculate-the-area-of-a-polygon-on-the-earths-surface-using-python
+           # https://github.com/scisco/area
+           dic['area'] = arealatlon(obj)/1e6
+           dic['unit'] = 'km^2'
+           dic['all_lonlat'] = all_lonlat
         # store dic into global dictionary whose key is no of pixels
         # in the selected region.
         areadic['region'+str(count)] = dic
