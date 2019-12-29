@@ -477,7 +477,7 @@ def getAllBoundaryOfClosedAreas(data, **kwarg):
              Each key ['regionN'] contains another dictionary which contains
              following keys & values
 
-             'area'     -> lat, lon weighted area value in m^2 of that
+             'area'     -> lat, lon weighted area value in km^2 of that
                            particular closed domain/region
 
              'unit'     -> area unit is km^2
@@ -657,10 +657,11 @@ def getAreaOfAllClosedDomains(data, condition, **kwarg):
              Each key ['regionN'] contains another dictionary which contains
              following keys & values
 
-             'area'     -> lat, lon weighted area value in m^2 of that
+             'area'     -> lat, lon weighted area value in km^2 of that
                            particular closed domain/region
 
-             'unit'     -> area unit is m^2
+             'unit'     -> area unit is km^2
+             'all_lonlat' -> list contains all lon,lat of selected closed region (count would be totalPixelsCount)
 
              'bpixels'  -> list of tuples contain (i, j) or (x, y) or
                            (row, col) of boundary pixels of closed domain
@@ -754,7 +755,7 @@ def getAreaOfAllClosedDomains(data, condition, **kwarg):
     # eg : region2
     >>> outdict['region2'].keys()
     ['area', 'region', 'bpixels', 'blatlons',
-    'cpixels', 'clatlons', 'totalPixelsCount', 'unit']
+    'cpixels', 'clatlons', 'totalPixelsCount', 'unit', 'all_lonlat']
 
     # total no of valid pixels within the irregular closed domain
     >>> outdict['region2']['totalPixelsCount']
